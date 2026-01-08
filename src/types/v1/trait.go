@@ -1,6 +1,6 @@
 package types
 
-import "github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/multi"
+import "github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/multi"
 
 type TraitCount struct {
 	multi.ItemTrait

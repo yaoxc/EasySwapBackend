@@ -6,19 +6,19 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ProjectsTask/EasySwapBase/errcode"
-	"github.com/ProjectsTask/EasySwapBase/evm/eip"
-	"github.com/ProjectsTask/EasySwapBase/logger/xzap"
-	"github.com/ProjectsTask/EasySwapBase/ordermanager"
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/multi"
+	"github.com/yaoxc/EasySwapBase/errcode"
+	"github.com/yaoxc/EasySwapBase/evm/eip"
+	"github.com/yaoxc/EasySwapBase/logger/xzap"
+	"github.com/yaoxc/EasySwapBase/ordermanager"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/multi"
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/dao"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/mq"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
-	"github.com/ProjectsTask/EasySwapBackend/src/types/v1"
+	"github.com/yaoxc/EasySwapBackend/src/dao"
+	"github.com/yaoxc/EasySwapBackend/src/service/mq"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/types/v1"
 )
 
 func GetBids(ctx context.Context, svcCtx *svc.ServerCtx, chain string, collectionAddr string, page, pageSize int) (*types.CollectionBidsResp, error) {

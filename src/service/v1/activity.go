@@ -5,8 +5,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
-	"github.com/ProjectsTask/EasySwapBackend/src/types/v1"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/types/v1"
 )
 
 func GetMultiChainActivities(ctx context.Context, svcCtx *svc.ServerCtx, chainID []int, chainName []string, collectionAddrs []string, tokenID string, userAddrs []string, eventTypes []string, page, pageSize int) (*types.ActivityResp, error) {

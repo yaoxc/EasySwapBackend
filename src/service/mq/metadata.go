@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ProjectsTask/EasySwapBase/logger/xzap"
-	"github.com/ProjectsTask/EasySwapBase/stores/xkv"
+	"github.com/yaoxc/EasySwapBase/logger/xzap"
+	"github.com/yaoxc/EasySwapBase/stores/xkv"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/types/v1"
+	"github.com/yaoxc/EasySwapBackend/src/types/v1"
 )
 
 const CacheRefreshSingleItemMetadataKey = "cache:%s:%s:item:refresh:metadata"

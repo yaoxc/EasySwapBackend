@@ -1,12 +1,12 @@
 package svc
 
 import (
-	"github.com/ProjectsTask/EasySwapBase/evm/erc"
-	//"github.com/ProjectsTask/EasySwapBase/image"
-	"github.com/ProjectsTask/EasySwapBase/stores/xkv"
+	"github.com/yaoxc/EasySwapBase/evm/erc"
+	//"github.com/yaoxc/EasySwapBase/image"
+	"github.com/yaoxc/EasySwapBase/stores/xkv"
 	"gorm.io/gorm"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/dao"
+	"github.com/yaoxc/EasySwapBackend/src/dao"
 )
 
 type CtxConfig struct {

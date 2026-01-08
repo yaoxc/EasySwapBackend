@@ -6,15 +6,15 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ProjectsTask/EasySwapBase/errcode"
-	"github.com/ProjectsTask/EasySwapBase/logger/xzap"
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/multi"
+	"github.com/yaoxc/EasySwapBase/errcode"
+	"github.com/yaoxc/EasySwapBase/logger/xzap"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/multi"
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/dao"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
-	"github.com/ProjectsTask/EasySwapBackend/src/types/v1"
+	"github.com/yaoxc/EasySwapBackend/src/dao"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/types/v1"
 )
 
 const MinuteSeconds = 60

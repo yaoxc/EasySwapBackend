@@ -3,18 +3,18 @@ package svc
 import (
 	"context"
 
-	"github.com/ProjectsTask/EasySwapBase/chain/nftchainservice"
-	"github.com/ProjectsTask/EasySwapBase/logger/xzap"
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb"
-	"github.com/ProjectsTask/EasySwapBase/stores/xkv"
+	"github.com/yaoxc/EasySwapBase/chain/nftchainservice"
+	"github.com/yaoxc/EasySwapBase/logger/xzap"
+	"github.com/yaoxc/EasySwapBase/stores/gdb"
+	"github.com/yaoxc/EasySwapBase/stores/xkv"
 	"github.com/pkg/errors"
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/kv"
 	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/gorm"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/config"
-	"github.com/ProjectsTask/EasySwapBackend/src/dao"
+	"github.com/yaoxc/EasySwapBackend/src/config"
+	"github.com/yaoxc/EasySwapBackend/src/dao"
 )
 
 type ServerCtx struct {

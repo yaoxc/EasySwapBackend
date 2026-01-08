@@ -12,14 +12,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ProjectsTask/EasySwapBase/errcode"
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/base"
+	"github.com/yaoxc/EasySwapBase/errcode"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/base"
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/api/middleware"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
-	"github.com/ProjectsTask/EasySwapBackend/src/types/v1"
+	"github.com/yaoxc/EasySwapBackend/src/api/middleware"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/types/v1"
 )
 
 func getUserLoginMsgCacheKey(address string) string {

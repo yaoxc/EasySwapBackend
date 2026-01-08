@@ -7,13 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"github.com/ProjectsTask/EasySwapBase/errcode"
-	"github.com/ProjectsTask/EasySwapBase/logger/xzap"
-	"github.com/ProjectsTask/EasySwapBase/xhttp"
+	"github.com/yaoxc/EasySwapBase/errcode"
+	"github.com/yaoxc/EasySwapBase/logger/xzap"
+	"github.com/yaoxc/EasySwapBase/xhttp"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/v1"
-	"github.com/ProjectsTask/EasySwapBackend/src/types/v1"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/service/v1"
+	"github.com/yaoxc/EasySwapBackend/src/types/v1"
 )
 
 func CollectionItemsHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {

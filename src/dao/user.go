@@ -3,8 +3,8 @@ package dao
 import (
 	"context"
 
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/base"
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/multi"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/base"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/multi"
 	"github.com/pkg/errors"
 )
 

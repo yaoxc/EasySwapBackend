@@ -5,9 +5,9 @@
 ### 准备条件
 
 1. 确保将下面三个 repo 都pull同一个本地目录
-    - https://github.com/ProjectsTask/EasySwapBackend
-    - https://github.com/ProjectsTask/EasySwapBase
-    - https://github.com/ProjectsTask/EasySwapSync
+    - https://github.com/yaoxc/EasySwapBackend
+    - https://github.com/yaoxc/EasySwapBase
+    - https://github.com/yaoxc/EasySwapSync
     -- EasySwapBackend
     -- EasySwapBase
     -- EasySwapSync
@@ -16,12 +16,12 @@
 
 3. 打开 go.mod 这一行的注释，然后 终端执行 `go mod tidy`
 ```shell
-replace github.com/ProjectsTask/EasySwapBase => ../EasySwapBase
+replace github.com/yaoxc/EasySwapBase => ../EasySwapBase
 ```
 
 3. infura 上面注册一个账号，给 `chain_supported.endpoint` 替换掉
 
-4. 通过部署 https://github.com/ProjectsTask/EasySwapContract（看里面的README.md）得到订单簿合约的地址 替换掉 config/config.toml 中的 easyswap_market.contract 
+4. 通过部署 https://github.com/yaoxc/EasySwapContract（看里面的README.md）得到订单簿合约的地址 替换掉 config/config.toml 中的 easyswap_market.contract 
 
 5. docker 上面 运行一下 `EasySwapSync/docker-compose.yml` 给 redis 和 mysql 环境整好
 

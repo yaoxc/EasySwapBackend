@@ -3,12 +3,12 @@ package app
 import (
 	"context"
 
-	"github.com/ProjectsTask/EasySwapBase/logger/xzap"
+	"github.com/yaoxc/EasySwapBase/logger/xzap"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/config"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/config"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
 )
 
 type Platform struct {

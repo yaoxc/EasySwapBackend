@@ -1,11 +1,11 @@
-module github.com/ProjectsTask/EasySwapBackend
+module github.com/yaoxc/EasySwapBackend
 
 go 1.21
 
-//replace github.com/ProjectsTask/EasySwapBase => ../EasySwapBase
+//replace github.com/yaoxc/EasySwapBase => ../EasySwapBase
 
 require (
-	github.com/ProjectsTask/EasySwapBase v0.0.0-20241223121943-2904ff737482
+	github.com/yaoxc/EasySwapBase v0.0.0-20241223121943-2904ff737482
 	github.com/anyswap/CrossChain-Bridge v0.3.9
 	github.com/ethereum/go-ethereum v1.12.0
 	github.com/gin-contrib/cors v1.3.1

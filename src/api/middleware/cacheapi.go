@@ -12,9 +12,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/ProjectsTask/EasySwapBase/errcode"
-	"github.com/ProjectsTask/EasySwapBase/stores/xkv"
-	"github.com/ProjectsTask/EasySwapBase/xhttp"
+	"github.com/yaoxc/EasySwapBase/errcode"
+	"github.com/yaoxc/EasySwapBase/stores/xkv"
+	"github.com/yaoxc/EasySwapBase/xhttp"
 )
 
 const CacheApiPrefix = "apicache:"

@@ -7,13 +7,13 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/multi"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/multi"
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/dao"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
-	"github.com/ProjectsTask/EasySwapBackend/src/types/v1"
+	"github.com/yaoxc/EasySwapBackend/src/dao"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/types/v1"
 )
 
 const BidTypeOffset = 3

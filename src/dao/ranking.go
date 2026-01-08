@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb/orderbookmodel/multi"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/multi"
 )
 
 type CollectionTrade struct {

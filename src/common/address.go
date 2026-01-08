@@ -1,11 +1,11 @@
 package common
 
 import (
-	"github.com/ProjectsTask/EasySwapBase/evm/eip"
+	"github.com/yaoxc/EasySwapBase/evm/eip"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/pkg/errors"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/common/utils"
+	"github.com/yaoxc/EasySwapBackend/src/common/utils"
 )
 
 func UnifyAddress(address string) (string, error) {

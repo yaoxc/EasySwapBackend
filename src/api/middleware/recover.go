@@ -9,9 +9,9 @@ import (
 	"net/http/httputil"
 	"runtime"
 
-	"github.com/ProjectsTask/EasySwapBase/errcode"
-	"github.com/ProjectsTask/EasySwapBase/logger/xzap"
-	"github.com/ProjectsTask/EasySwapBase/xhttp"
+	"github.com/yaoxc/EasySwapBase/errcode"
+	"github.com/yaoxc/EasySwapBase/logger/xzap"
+	"github.com/yaoxc/EasySwapBase/xhttp"
 	"github.com/gin-gonic/gin"
 )
 

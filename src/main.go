@@ -4,10 +4,10 @@ import (
 	"flag"
 	_ "net/http/pprof"
 
-	"github.com/ProjectsTask/EasySwapBackend/src/api/router"
-	"github.com/ProjectsTask/EasySwapBackend/src/app"
-	"github.com/ProjectsTask/EasySwapBackend/src/config"
-	"github.com/ProjectsTask/EasySwapBackend/src/service/svc"
+	"github.com/yaoxc/EasySwapBackend/src/api/router"
+	"github.com/yaoxc/EasySwapBackend/src/app"
+	"github.com/yaoxc/EasySwapBackend/src/config"
+	"github.com/yaoxc/EasySwapBackend/src/service/svc"
 )
 
 const (

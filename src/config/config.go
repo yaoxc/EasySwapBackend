@@ -3,10 +3,10 @@ package config
 import (
 	"strings"
 
-	"github.com/ProjectsTask/EasySwapBase/evm/erc"
-	//"github.com/ProjectsTask/EasySwapBase/image"
-	logging "github.com/ProjectsTask/EasySwapBase/logger"
-	"github.com/ProjectsTask/EasySwapBase/stores/gdb"
+	"github.com/yaoxc/EasySwapBase/evm/erc"
+	//"github.com/yaoxc/EasySwapBase/image"
+	logging "github.com/yaoxc/EasySwapBase/logger"
+	"github.com/yaoxc/EasySwapBase/stores/gdb"
 	"github.com/spf13/viper"
 )
 
