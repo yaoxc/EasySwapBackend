@@ -19,16 +19,28 @@ type CtxConfig struct {
 
 type CtxOption func(conf *CtxConfig)
 
+// NewServerCtx 创建一个新的ServerCtx实例
+// 参数:
+//
+//	options: 可变参数，用于配置CtxConfig的结构体选项
+//
+// 返回值:
+//
+//	*ServerCtx: 返回一个配置好的ServerCtx指针
 func NewServerCtx(options ...CtxOption) *ServerCtx {
+	// 初始化一个空的CtxConfig结构体
 	c := &CtxConfig{}
+	// 遍历所有传入的选项函数，并应用到CtxConfig结构体上
+	// for index, value := range collection { } ,  第一个返回值（索引）被 _ 接收了，表示忽略它
 	for _, opt := range options {
 		opt(c)
 	}
+	// 返回一个ServerCtx实例，使用配置好的CtxConfig进行初始化
 	return &ServerCtx{
 		DB: c.db,
-		//ImageMgr: c.imageMgr,
-		KvStore: c.KvStore,
-		Dao:     c.dao,
+		//ImageMgr: c.imageMgr, // 此行被注释掉，表示暂时不使用ImageMgr
+		KvStore: c.KvStore, // 使用配置的KvStore
+		Dao:     c.dao,     // 使用配置的Dao
 	}
 }
 

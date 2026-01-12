@@ -1,13 +1,14 @@
 package config
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/yaoxc/EasySwapBase/evm/erc"
 	//"github.com/yaoxc/EasySwapBase/image"
+	"github.com/spf13/viper"
 	logging "github.com/yaoxc/EasySwapBase/logger"
 	"github.com/yaoxc/EasySwapBase/stores/gdb"
-	"github.com/spf13/viper"
 )
 
 type Config struct {
@@ -26,9 +27,10 @@ type ProjectCfg struct {
 	Name string `toml:"name" mapstructure:"name" json:"name"`
 }
 
+// Viper 将配置映射到结构体时，默认使用 mapstructure tag。如果你习惯写 JSON tag，Viper 是无法识别的。
 type Api struct {
 	Port   string `toml:"port" json:"port"`
-	MaxNum int64  `toml:"max_num" json:"max_num"`
+	MaxNum int64  `toml:"max_num" mapstructure:"max_num" json:"max_num"` // mapstructure:"max_num" 必须添加，否则读取不到
 }
 
 type KvConf struct {
@@ -60,6 +62,7 @@ type ChainSupported struct {
 // @params path: the path of config dir
 func UnmarshalConfig(configFilePath string) (*Config, error) {
 	viper.SetConfigFile(configFilePath)
+	fmt.Println("config file path : ", configFilePath)
 	viper.SetConfigType("toml")
 	viper.AutomaticEnv()
 	viper.SetEnvPrefix("CNFT")
