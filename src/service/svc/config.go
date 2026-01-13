@@ -29,6 +29,7 @@ type CtxOption func(conf *CtxConfig)
 //	*ServerCtx: 返回一个配置好的ServerCtx指针
 func NewServerCtx(options ...CtxOption) *ServerCtx {
 	// 初始化一个空的CtxConfig结构体
+	// 临时变量
 	c := &CtxConfig{}
 	// 遍历所有传入的选项函数，并应用到CtxConfig结构体上
 	// for index, value := range collection { } ,  第一个返回值（索引）被 _ 接收了，表示忽略它

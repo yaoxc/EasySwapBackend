@@ -17,11 +17,13 @@ import (
 )
 
 type ServerCtx struct {
-	C  *config.Config
-	DB *gorm.DB
+	C *config.Config // 设置为main开始初始化的配置对象
+
+	// NewServerCtx 填充的组件
+	DB *gorm.DB // 数据库连接
 	//ImageMgr image.ImageManager
-	Dao      *dao.Dao
-	KvStore  *xkv.Store
+	Dao      *dao.Dao   // 数据访问对象
+	KvStore  *xkv.Store // 键值存储redis
 	RankKey  string
 	NodeSrvs map[int64]*nftchainservice.Service
 }
