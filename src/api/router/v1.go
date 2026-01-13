@@ -11,6 +11,7 @@ import (
 func loadV1(r *gin.Engine, svcCtx *svc.ServerCtx) {
 	apiV1 := r.Group("/api/v1")
 
+	// 用户认证流程
 	user := apiV1.Group("/user")
 	{
 		user.GET("/:address/login-message", v1.GetLoginMessageHandler(svcCtx)) // 生成login签名信息

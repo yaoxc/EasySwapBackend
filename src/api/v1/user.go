@@ -1,10 +1,10 @@
 package v1
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/yaoxc/EasySwapBase/errcode"
 	"github.com/yaoxc/EasySwapBase/kit/validator"
 	"github.com/yaoxc/EasySwapBase/xhttp"
-	"github.com/gin-gonic/gin"
 
 	"github.com/yaoxc/EasySwapBackend/src/service/svc"
 	"github.com/yaoxc/EasySwapBackend/src/service/v1"
@@ -13,7 +13,10 @@ import (
 
 func UserLoginHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// 数据流向: HTTP Request Body → c.BindJSON → types.LoginReq结构体
+		// 初始化请求结构体
 		req := types.LoginReq{}
+		// 将JSON数据绑定到结构体指针
 		if err := c.BindJSON(&req); err != nil {
 			xhttp.Error(c, err)
 			return
