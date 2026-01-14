@@ -404,6 +404,7 @@ func ItemMetadataRefreshHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 
 func CollectionDetailHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// c.Query("chain_id"): 从HTTP请求的URL查询参数中获取名为"chain_id"的值
 		chainID, err := strconv.ParseInt(c.Query("chain_id"), 10, 32)
 		if err != nil {
 			xhttp.Error(c, errcode.ErrInvalidParams)

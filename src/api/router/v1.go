@@ -27,9 +27,11 @@ func loadV1(r *gin.Engine, svcCtx *svc.ServerCtx) {
 		collections.GET("/:address/:token_id/bids", v1.CollectionItemBidsHandler(svcCtx)) // 指定Item的bid信息
 		collections.GET("/:address/items", v1.CollectionItemsHandler(svcCtx))             // 指定Collection的items信息
 
-		collections.GET("/:address/:token_id", v1.ItemDetailHandler(svcCtx))                                                  // 获取NFT Item的详细信息
-		collections.GET("/:address/:token_id/traits", v1.ItemTraitsHandler(svcCtx))                                           //获取NFT Item的Attribute信息
-		collections.GET("/:address/top-trait", v1.ItemTopTraitPriceHandler(svcCtx))                                           //获取NFT Item的Trait的最高价格信息
+		collections.GET("/:address/:token_id", v1.ItemDetailHandler(svcCtx))        // 获取NFT Item的详细信息
+		collections.GET("/:address/:token_id/traits", v1.ItemTraitsHandler(svcCtx)) //获取NFT Item的Attribute信息
+		collections.GET("/:address/top-trait", v1.ItemTopTraitPriceHandler(svcCtx))
+
+		// 使用接口缓存中间件
 		collections.GET("/:address/:token_id/image", middleware.CacheApi(svcCtx.KvStore, 60), v1.GetItemImageHandler(svcCtx)) // 获取NFT Item的图片信息
 		collections.GET("/:address/history-sales", v1.HistorySalesHandler(svcCtx))                                            // NFT销售历史价格信息
 		collections.GET("/:address/:token_id/owner", v1.ItemOwnerHandler(svcCtx))                                             // 获取NFT Item的owner信息

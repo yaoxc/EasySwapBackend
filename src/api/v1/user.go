@@ -66,6 +66,7 @@ func GetLoginMessageHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 
 func GetSigStatusHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// c.Params.ByName：获取路径参数
 		userAddr := c.Params.ByName("address")
 		if userAddr == "" {
 			xhttp.Error(c, errcode.NewCustomErr("user addr is null"))
