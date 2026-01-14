@@ -9,7 +9,10 @@ max_num = 500
 compress = false
 leep_days = 7
 level = "info"
+# 支持两种模式 console: 控制台输出模式；  volume: 文件输出模式；
+#mode = "volume"
 mode = "console"
+# 文件输出模式下的日志路径
 path = "logs/v1-backend"
 service_name = "v1-backend"
 

@@ -35,7 +35,7 @@ func NewServiceContext(c *config.Config) (*ServerCtx, error) {
 	//	return nil, errors.Wrap(err, "failed on create image manager")
 	//}
 
-	// Log
+	// Log组件初始化
 	_, err = xzap.SetUp(c.Log)
 	if err != nil {
 		return nil, err
