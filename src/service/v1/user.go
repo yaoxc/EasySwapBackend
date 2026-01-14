@@ -96,7 +96,9 @@ func UserLogin(ctx context.Context, svcCtx *svc.ServerCtx, req types.LoginReq) (
 
 	// 生成用户token
 	tokenKey := getUserLoginTokenCacheKey(req.Address)
+	fmt.Println("用户token的key：", tokenKey)
 	userToken, err := AesEncryptOFB([]byte(tokenKey), []byte(middleware.CR_LOGIN_SALT))
+	fmt.Println("保存用户token：", userToken)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed on get user token")
 	}
