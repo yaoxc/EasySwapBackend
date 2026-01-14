@@ -97,6 +97,15 @@
   - [4. 安全机制](#4-安全机制)
     - [4.1 地址验证](#41-地址验证)
     - [4.2 设备隔离](#42-设备隔离)
+- [十二、前后端签名验证](#十二前后端签名验证)
+  - [前端](#前端)
+    - [1. API来源：](#1-api来源)
+    - [2. 安全性](#2-安全性)
+  - [后端](#后端)
+  - [后端签名验证，前端是不是还要把公钥传递过来?](#后端签名验证前端是不是还要把公钥传递过来)
+  - [后端验证流程说明](#后端验证流程说明)
+    - [安全考虑](#安全考虑)
+    - [实际应用](#实际应用)
 
 
 # 一、代码解读
@@ -985,4 +994,138 @@ func AuthMiddleware() gin.HandlerFunc {
 - 可以单独撤销特定设备权限
 
 这种设计通过地址识别用户，通过设备ID区分设备，既保证了安全性，又提供了灵活的多设备支持。
+
+
+# 十二、前后端签名验证
+
+## 前端
+### 1. API来源：
+- 这个API来自ethers.js库，在代码中可以看到项目依赖了ethers包
+- 它是Web3钱包交互的标准接口之一
+
+```js
+// 1. 获取登录消息
+const { data: message } = await GetLoginMessage(address);
+
+// 2. 用户使用钱包签名
+const signature = await wallet.signMessage(message);
+
+// 3. 提交签名登录
+await Login({
+    chain_id: chainId,
+    message,
+    signature,
+    address
+});
+
+```
+### 2. 安全性
+- 签名过程在用户钱包中进行，私钥不会暴露
+- 使用标准的ECDSA签名算法
+- 签名结果会发送到后端进行验证
+
+> 这是Web3应用中标准的用户认证流程，通过钱包签名来验证用户身份，确保安全性和去中心化特性。
+
+## 后端
+
+> go-ethereum包中提供了消息签名的方法。主要在github.com/ethereum/go-ethereum/crypto包中.
+
+**核心签名方法：**
+
+1. Sign方法:
+```go
+func Sign(hash []byte, prv *ecdsa.PrivateKey) ([]byte, error)
+```
+- 使用私钥对哈希值进行签名
+- 返回65字节的签名数据（r,s,v）
+
+2. SignHash方法
+```go
+func SignHash(data []byte) []byte
+
+```
+- 对数据进行Keccak256哈希
+- 通常在签名前使用
+
+3. 在项目中的典型使用场景：
+
+```go   
+import (
+    "github.com/ethereum/go-ethereum/crypto"
+    "github.com/ethereum/go-ethereum/common/hexutil"
+)
+
+// 1. 准备消息
+message := "Hello, world!"
+hash := crypto.Keccak256Hash([]byte(message))
+
+// 2. 使用私钥签名[r s v]
+signature, err := crypto.Sign(hash.Bytes(), privateKey)
+if err != nil {
+    return err
+}
+
+// 3. 转换为十六进制字符串
+sigHex := hexutil.Encode(signature)
+```
+
+注意事项:
+- 签名前必须对消息进行Keccak256哈希
+- 签名结果是65字节：32字节(r) + 32字节(s) + 1字节(v)
+- v的值是27或28，用于恢复公钥
+
+## 后端签名验证，前端是不是还要把公钥传递过来?
+
+> 不需要前端传递公钥。在以太坊签名验证中，可以通过签名和消息恢复出公钥，然后推导出地址。
+
+## 后端验证流程说明
+
+1. **前端只需提供**：
+   - 签名后的消息
+   - 签名值
+   - 签名地址
+
+2. **后端验证过程**（见 `EasySwapBackend/src/common/utils/crypto.go`）：
+```go
+func VerifySig(addr, sigHex string, digest []byte) bool {
+    // 1. 从签名恢复公钥
+    publicKeyBytes, err := crypto.Ecrecover(digest, signature)
+    
+    // 2. 将公钥转换为地址
+    address := crypto.PubkeyToAddress(*publicKeyECDSA).Hex()
+    
+    // 3. 验证地址是否匹配
+    if !strings.EqualFold(addr, address) {
+        return false
+    }
+}
+```
+
+### 安全考虑
+
+1. **不需要传递公钥的原因**：
+   - 以太坊签名本身就包含了恢复公钥所需的信息
+   - 可以通过签名和消息唯一确定签名者地址
+   - 避免了公钥被篡改的风险
+
+2. **验证机制**：
+   - 使用ECDSA恢复算法从签名中提取公钥
+   - 通过公钥计算地址
+   - 验证计算出的地址与提供的地址是否匹配
+
+### 实际应用
+
+在 `EasySwapBackend/src/service/v1/user.go` 中的登录流程：
+```go
+// 验证签名 合法性
+//ok := verifySignature(req.Message, req.Signature, req.Address)
+//if !ok {
+//    return nil, errors.New("invalid signature")
+//}
+```
+
+这种设计更安全，因为：
+1. 减少了前端需要传递的数据
+2. 避免了公钥被伪造的风险
+3. 利用了以太坊签名的内置验证机制
 
