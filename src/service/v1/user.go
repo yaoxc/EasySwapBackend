@@ -12,10 +12,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/yaoxc/EasySwapBase/errcode"
-	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/base"
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
+	"github.com/yaoxc/EasySwapBase/errcode"
+	"github.com/yaoxc/EasySwapBase/stores/gdb/orderbookmodel/base"
 
 	"github.com/yaoxc/EasySwapBackend/src/api/middleware"
 	"github.com/yaoxc/EasySwapBackend/src/service/svc"
@@ -34,13 +34,14 @@ func UserLogin(ctx context.Context, svcCtx *svc.ServerCtx, req types.LoginReq) (
 	// 返回结果
 	res := types.UserLoginInfo{}
 
+	// 验证签名 合法性
 	//todo: add verify signature
 	//ok := verifySignature(req.Message, req.Signature, req.PublicKey)
 	//if !ok {
 	//	return nil, errors.New("invalid signature")
 	//}
 
-	// 从缓存中获取登录消息UUID
+	// 从 redis 缓存中获取登录消息UUID
 	cachedUUID, err := svcCtx.KvStore.Get(getUserLoginMsgCacheKey(req.Address))
 	if cachedUUID == "" || err != nil {
 		return nil, errcode.ErrTokenExpire
@@ -57,6 +58,15 @@ func UserLogin(ctx context.Context, svcCtx *svc.ServerCtx, req types.LoginReq) (
 	if loginUUID != cachedUUID {
 		return nil, errcode.ErrTokenExpire
 	}
+
+	// 需要补充
+	// 验证成功后立即删除UUID，确保：
+	// 	1. UUID真正实现一次性使用
+	// 	2. 防止重放攻击
+	// 	3. 符合安全设计文档的要求
+	// if err := svcCtx.KvStore.Del(getUserLoginMsgCacheKey(req.Address)); err != nil {
+	// 	return nil, errors.Wrap(err, "failed to delete used UUID")
+	// }
 
 	// 查询用户信息
 	var user base.User
@@ -138,9 +148,14 @@ func genLoginTemplate(nonce string) string {
 	return fmt.Sprintf("Welcome to EasySwap!\nNonce:%s", nonce)
 }
 
+// 生成登录消息
 func GetUserLoginMsg(ctx context.Context, svcCtx *svc.ServerCtx, address string) (*types.UserLoginMsgResp, error) {
+	// 每次都会生成新的uuid， 旧的UUID即使未过期也无法再次使用
+	// 这种设计确保了登录消息的一次性使用，防止了重放攻击，提高了系统的安全性
 	uuid := uuid.NewString()
+	// 消息格式：Welcome to EasySwap!\nNonce:UUID
 	loginMsg := genLoginTemplate(uuid)
+	// 保存到redis中，72小时失效
 	if err := svcCtx.KvStore.Setex(getUserLoginMsgCacheKey(address), uuid, 72*60*60); err != nil {
 		return nil, errors.Wrap(err, "failed on generate login msg")
 	}

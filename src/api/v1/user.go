@@ -13,6 +13,10 @@ import (
 
 func UserLoginHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// ===============================================
+		// c *gin.Context 参数的值是在 Gin 框架的路由匹配过程中自动设置
+		// ===============================================
+
 		// 数据流向: HTTP Request Body → c.BindJSON → types.LoginReq结构体
 		// 初始化请求结构体
 		req := types.LoginReq{}
@@ -22,11 +26,13 @@ func UserLoginHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 			return
 		}
 
+		// 结构体验证
 		if err := validator.Verify(&req); err != nil {
 			xhttp.Error(c, errcode.NewCustomErr(err.Error()))
 			return
 		}
 
+		// controller 调用 service 层处理业务逻辑
 		res, err := service.UserLogin(c.Request.Context(), svcCtx, req)
 		if err != nil {
 			xhttp.Error(c, errcode.NewCustomErr(err.Error()))
@@ -47,6 +53,7 @@ func GetLoginMessageHandler(svcCtx *svc.ServerCtx) gin.HandlerFunc {
 			return
 		}
 
+		// controller 调用 service 层, 生成登录消息
 		res, err := service.GetUserLoginMsg(c.Request.Context(), svcCtx, address)
 		if err != nil {
 			xhttp.Error(c, errcode.NewCustomErr(err.Error()))
