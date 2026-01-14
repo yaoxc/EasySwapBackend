@@ -14,10 +14,19 @@ import (
 func NewRouter(svcCtx *svc.ServerCtx) *gin.Engine {
 	gin.ForceConsoleColor()
 	gin.SetMode(gin.ReleaseMode)
-	r := gin.New()                        // 新建一个gin引擎实例
-	r.Use(middleware.RecoverMiddleware()) // 使用恢复中间件
-	r.Use(middleware.RLog())              // 使用日志中间件
+	r := gin.New() // 新建一个gin引擎实例
 
+	// 捕获http请求处理过程中发生的panic错误，防止程序崩溃
+	r.Use(middleware.RecoverMiddleware()) // 使用恢复中间件
+
+	// RLog 请求响应日志打印处理器 【对每个请求 详细信息 打印】
+	r.Use(middleware.RLog())
+
+	// r.Use(middleware.AuthMiddleWare(svcCtx.KvStore)) // 使用认证中间件
+
+	// r.Use(middleware.CacheApi(svcCtx.KvStore, 2)) // 使用API缓存中间件，缓存时间为2秒
+
+	// 跨域资源共享（CORS）中间件配置
 	r.Use(cors.New(cors.Config{ // 使用cors中间件
 		AllowAllOrigins:  true,
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
